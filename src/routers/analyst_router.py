@@ -6,10 +6,14 @@ Exposes HTTP endpoints for log analysis
 import azure.functions as func
 import logging
 import json
+from pydantic import ValidationError
 from src.models.analyst_models import AnalystRequest
 from src.services.analyst_service import get_analyst_service
 
+# Create Blueprint
+analyst_bp = func.Blueprint()
 
+@analyst_bp.route(route="analyze-logs", auth_level=func.AuthLevel.ANONYMOUS, methods=["POST"])
 async def handle_analyze_logs(req: func.HttpRequest) -> func.HttpResponse:
     """
     POST /api/analyze-logs
@@ -18,15 +22,6 @@ async def handle_analyze_logs(req: func.HttpRequest) -> func.HttpResponse:
     {
         "query": "How many SQL injection attempts?",
         "csv_path": "data/raw/firewall_logs.csv"  // optional
-    }
-    
-    Response:
-    {
-        "query": "...",
-        "generated_code": "...",
-        "execution_result": {...},
-        "natural_language_answer": "...",
-        "confidence": "high"
     }
     """
     logging.info("Analyst endpoint called")
@@ -47,9 +42,9 @@ async def handle_analyze_logs(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json"
         )
         
-    except ValueError as e:
+    except ValidationError as e:
         return func.HttpResponse(
-            body=json.dumps({"error": f"Invalid request: {str(e)}"}),
+            json.dumps({"error": "Invalid input", "details": e.errors()}),
             status_code=400,
             mimetype="application/json"
         )
