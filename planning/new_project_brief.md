@@ -20,19 +20,13 @@ Instead of a single bot, we are building a team:
 
 ## 3. The 7-Day Sprint Plan
 
-| Day | Focus Area | Deliverable |
+| Phase | Focus Area | Deliverable |
 | :--- | :--- | :--- |
-| **Day 1** | **The Data Lake** | Python script using `Faker` to generate 50k rows of realistic security logs (SQL Injection, Brute Force). Upload to Azure Blob. |
-| **Day 2** | **Analyst Agent** | Build a "Code Interpreter" tool. The AI writes Python code to query the CSVs (e.g., "Find all IPs with 500+ requests"). |
-| **Day 3** | **Manager Agent** | Implement the "Planner" logic. The Manager takes a vague alert and decides *which* agent to call next. |
-| **Day 4** | **State Management** | Connect **Azure CosmosDB**. Ensure the agents remember the investigation context across multiple API calls. |
-| **Day 5** | **The Loop** | Implement the recursive "Plan $\rightarrow$ Execute $\rightarrow$ Observe" loop. The swarm runs until the threat is neutralized. |
-| **Day 6** | **Evaluation** | Run the swarm against 10 different attack scenarios. Measure success rate and tokens used (PromptOps). |
-| **Day 7** | **Cloud Deploy** | Deploy the entire multi-agent system to Azure Functions with a CI/CD pipeline. |
+| **Phase 1** | **The Data Lake** | Python script using `Faker` to generate 50k rows of realistic security logs (SQL Injection, Brute Force). Upload to Azure Blob. |
+| **Phase 2** | **Analyst Agent** | Build a "Code Interpreter" tool. The AI writes Python code to query the CSVs (e.g., "Find all IPs with 500+ requests"). |
+| **Phase 3** | **Manager Agent** | Implement the "Planner" logic. The Manager takes a vague alert and decides *which* agent to call next. |
+| **Phase 4** | **State Management** | Connect **Azure CosmosDB**. Ensure the agents remember the investigation context across multiple API calls. |
+| **Phase 5** | **The Loop** | Implement the recursive "Plan $\rightarrow$ Execute $\rightarrow$ Observe" loop. The swarm runs until the threat is neutralized. |
+| **Phase 6** | **Evaluation** | Run the swarm against 10 different attack scenarios. Measure success rate and tokens used (PromptOps). |
+| **Phase 7** | **Cloud Deploy** | Deploy the entire multi-agent system to Azure Functions with a CI/CD pipeline. |
 
-## 4. Immediate Next Step (Day 1)
-**Goal**: Generate the Data.
-**Task**: Write a Python script to create a dummy `firewall_logs.csv` containing mixed benign traffic and specific attack patterns (e.g., specific IPs doing port scanning).
-
----
-*End of Brief. Please copy this into the new chat to maintain context.*

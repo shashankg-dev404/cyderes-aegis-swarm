@@ -4,7 +4,6 @@ Run: python scripts/test_investigation.py
 """
 
 import requests
-import json
 import time
 
 BASE_URL = "http://localhost:7071/api"
@@ -67,8 +66,8 @@ def test_investigation_endpoint():
                 print(f"   Confidence: {verdict['confidence']}")
                 print(f"   Summary: {verdict['threat_summary']}")
                 
-                print("\n   📋 Plan Executed:")
-                for task in result['plan']['tasks']:
+                print("\n   📋 Tasks Executed:")
+                for task in result.get('tasks_history', []):
                     print(f"   - [{task['agent'].upper()}] {task['action']}")
                 
                 # Validation
